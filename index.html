@@ -1,0 +1,519 @@
+<!--
+🔥 PROJECT INSTRUCTION: Car Dealership Landing Page
+Build a modern, responsive, and premium-quality car dealership landing page using HTML5, CSS3, and vanilla JavaScript.
+The page should be sleek, high-converting, and ready for Gumroad demo use.
+
+==========================
+🧱 PAGE STRUCTURE
+==========================
+1. Header/Navbar
+   - Logo (left), nav links (Home, Inventory, About, Reviews, Contact), sticky on scroll
+   - “Book a Test Drive” button (CTA)
+2. Hero Section
+   - Full-width car background (placeholder)
+   - Headline: “Drive Your Dream Car Today”
+   - Subtext + two buttons (“View Inventory”, “Get Quote”)
+   - Add simple fade-in or slide animation
+3. Featured Cars
+   - Grid layout (3–6 cards)
+   - Each: image, name, model, price, “View Details” button
+   - Hover animation (zoom/shxadow)
+4. Why Choose Us
+   - 3–4 feature cards with icons/text (“Trusted by Thousands”, “Certified Vehicles”, etc.)
+5. Testimonials
+   - JS-based slider with customer reviews, stars, circular avatars
+6. Contact / Inquiry Form
+   - Fields: Name, Email, Phone, Message
+   - Add validation + “Send Inquiry” button
+7. Footer
+   - Quick links, contact info, social icons, copyright
+   - Dark theme footer background
+
+==========================
+🎨 DESIGN REQUIREMENTS
+==========================
+- Use Flexbox or CSS Grid for layout.
+- Fully responsive (mobile, tablet, desktop).
+- Fonts: “Poppins” via Google Fonts.
+- Color palette:
+  Primary: #e63946 (red)
+  Secondary: #1d3557 (blue)
+  Accent: #f1faee (white)
+  Text: #333333
+- Buttons: rounded corners, smooth hover transitions.
+- Background: bright and clean; hero uses gradient overlay for contrast.
+- Include scroll-triggered animations and smooth scrolling between sections.
+- Use only vanilla JS (no frameworks).
+- Placeholder images: https://images.pexels.com or https://via.placeholder.com/600x400
+
+==========================
+🧩 FILE STRUCTURE
+==========================
+car-dealership-landing/
+├── index.html
+├── style.css
+├── script.js
+└── images must be from links from Pexels or relevant image sources.
+
+==========================
+🧠 ADDITIONAL FEATURES
+==========================
+- “Back to Top” button appears on scroll.
+- Highlight active nav section while scrolling.
+- Testimonials auto-slide every 5s.
+- Optional: Dark/Light mode toggle.
+- Comment code sections clearly.
+
+==========================
+🧾 OUTPUT GOAL
+==========================
+1. index.html → full structure with meta tags and linked assets
+2. style.css → clean, reusable styles with CSS variables
+3. script.js → animations, smooth scroll, and form validation
+Code must be well-indented, semantic, SEO-friendly, and visually striking.
+Make it look like a professional dealership’s main site landing page.
+-->
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Premium car dealership. Explore certified vehicles, book test drives, and get instant quotes." />
+  <meta name="keywords" content="car dealership, cars, book test drive, buy car, auto dealer" />
+  <meta name="author" content="RoadStar Motors" />
+  <title>RoadStar Motors | Drive Your Dream Car Today</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="home">
+  <!-- Header / Navbar -->
+  <header class="navbar navbar-animate">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="#home" class="logo logo-animate">RoadStar<span>Motors</span></a>
+        <nav>
+          <ul class="nav-menu">
+            <li class="nav-item-animate" style="--i: 1;"><a href="#home" class="nav-link active">Home</a></li>
+            <li class="nav-item-animate" style="--i: 2;"><a href="#inventory" class="nav-link">Inventory</a></li>
+            <li class="nav-item-animate" style="--i: 3;"><a href="#about" class="nav-link">About</a></li>
+            <li class="nav-item-animate" style="--i: 4;"><a href="#reviews" class="nav-link">Reviews</a></li>
+            <li class="nav-item-animate" style="--i: 5;"><a href="#contact" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="nav-controls controls-animate">
+          <button class="btn btn-primary btn-sm cta-test-drive btn-pulse">Book a Test Drive</button>
+          <button class="theme-toggle" aria-label="Toggle theme">
+            <span class="theme-icon sun-icon">☀️</span>
+            <span class="theme-icon moon-icon">🌙</span>
+          </button>
+          <button class="mobile-menu-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero hero-parallax">
+    <div class="hero-bg hero-bg-animate" role="img" aria-label="Luxury red sports car"></div>
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title hero-title-animate">
+          <span class="word" style="--i: 0;">Drive</span>
+          <span class="word" style="--i: 1;">Your</span>
+          <span class="word" style="--i: 2;">Dream</span>
+          <span class="word" style="--i: 3;">Car</span>
+          <span class="word" style="--i: 4;">Today</span>
+        </h1>
+        <p class="hero-subtitle hero-subtitle-animate">Premium, certified vehicles with flexible financing options. Book a test drive or get a personalized quote in minutes.</p>
+        <div class="hero-cta hero-cta-animate">
+          <a href="#inventory" class="btn btn-light btn-float">
+            <span>View Inventory</span>
+            <span class="btn-shine"></span>
+          </a>
+          <a href="#contact" class="btn btn-secondary btn-float" style="--delay: 0.2s;">
+            <span>Get Quote</span>
+            <span class="btn-shine"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- Featured Cars / Inventory -->
+  <section id="inventory" class="inventory section">
+    <div class="container">
+      <div class="section-header section-header-animate">
+        <h2 class="section-title-animate">Featured Cars</h2>
+        <p>Explore our most popular picks—certified, inspected, and ready to go.</p>
+      </div>
+      <div class="cars-grid">
+        <!-- Car Card 1 -->
+        <article class="car-card scroll-reveal card-hover-lift" style="--delay: 0s;">
+          <div class="car-image card-image-zoom">
+            <img src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Red Sports Coupe" />
+            <div class="card-badge badge-animate">New</div>
+          </div>
+          <div class="car-info">
+            <h3>RoadStar GT</h3>
+            <p class="car-meta">2023 • Automatic • Petrol</p>
+            <p class="car-price price-counter" data-price="48990">$48,990</p>
+            <a href="#contact" class="btn btn-outline btn-expand">
+              <span>View Details</span>
+              <span class="btn-arrow">→</span>
+            </a>
+          </div>
+        </article>
+        <!-- Car Card 2 -->
+        <article class="car-card scroll-reveal card-hover-lift" style="--delay: 0.1s;">
+          <div class="car-image card-image-zoom">
+            <img src="https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Blue Sedan" />
+            <div class="card-badge badge-animate" style="--badge-color: #10b981;">Eco</div>
+          </div>
+          <div class="car-info">
+            <h3>Urban LX</h3>
+            <p class="car-meta">2022 • Automatic • Hybrid</p>
+            <p class="car-price price-counter" data-price="32450">$32,450</p>
+            <a href="#contact" class="btn btn-outline btn-expand">
+              <span>View Details</span>
+              <span class="btn-arrow">→</span>
+            </a>
+          </div>
+        </article>
+        <!-- Car Card 3 -->
+        <article class="car-card scroll-reveal card-hover-lift" style="--delay: 0.2s;">
+          <div class="car-image card-image-zoom">
+            <img src="https://images.pexels.com/photos/97079/pexels-photo-97079.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="White SUV" />
+            <div class="card-badge badge-animate" style="--badge-color: #f59e0b;">Featured</div>
+          </div>
+          <div class="car-info">
+            <h3>Explorer X</h3>
+            <p class="car-meta">2024 • AWD • Diesel</p>
+            <p class="car-price price-counter" data-price="41990">$41,990</p>
+            <a href="#contact" class="btn btn-outline btn-expand">
+              <span>View Details</span>
+              <span class="btn-arrow">→</span>
+            </a>
+          </div>
+        </article>
+        <!-- Car Card 4 -->
+        <article class="car-card scroll-reveal card-hover-lift" style="--delay: 0.3s;">
+          <div class="car-image card-image-zoom">
+            <img src="https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Black Luxury Sedan" />
+            <div class="card-badge badge-animate" style="--badge-color: #8b5cf6;">Premium</div>
+          </div>
+          <div class="car-info">
+            <h3>Elite S</h3>
+            <p class="car-meta">2021 • Automatic • Petrol</p>
+            <p class="car-price price-counter" data-price="55500">$55,500</p>
+            <a href="#contact" class="btn btn-outline btn-expand">
+              <span>View Details</span>
+              <span class="btn-arrow">→</span>
+            </a>
+          </div>
+        </article>
+        <!-- Car Card 5 -->
+        <article class="car-card scroll-reveal card-hover-lift" style="--delay: 0.4s;">
+          <div class="car-image card-image-zoom">
+            <img src="https://images.pexels.com/photos/3752169/pexels-photo-3752169.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Red Convertible" />
+            <div class="card-badge badge-animate" style="--badge-color: #ef4444;">Hot</div>
+          </div>
+          <div class="car-info">
+            <h3>Convertible R</h3>
+            <p class="car-meta">2020 • Manual • Petrol</p>
+            <p class="car-price price-counter" data-price="38250">$38,250</p>
+            <a href="#contact" class="btn btn-outline btn-expand">
+              <span>View Details</span>
+              <span class="btn-arrow">→</span>
+            </a>
+          </div>
+        </article>
+        <!-- Car Card 6 -->
+        <article class="car-card scroll-reveal card-hover-lift" style="--delay: 0.5s;">
+          <div class="car-image card-image-zoom">
+            <img src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Silver Crossover" />
+            <div class="card-badge badge-animate">Best Value</div>
+          </div>
+          <div class="car-info">
+            <h3>CrossWave</h3>
+            <p class="car-meta">2021 • FWD • Petrol</p>
+            <p class="car-price price-counter" data-price="28900">$28,900</p>
+            <a href="#contact" class="btn btn-outline btn-expand">
+              <span>View Details</span>
+              <span class="btn-arrow">→</span>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section id="about" class="why-us section section-bg-animate">
+    <div class="container">
+      <div class="section-header section-header-animate">
+        <h2 class="section-title-animate">Why Choose Us</h2>
+        <p>Experience premium service, trusted quality, and great value.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card scroll-reveal feature-hover-tilt" style="--delay: 0s;">
+          <div class="feature-icon icon-bounce">✅</div>
+          <h3>Trusted by Thousands</h3>
+          <p>Highly rated by customers for honest pricing and transparent service.</p>
+          <div class="feature-glow"></div>
+        </div>
+        <div class="feature-card scroll-reveal feature-hover-tilt" style="--delay: 0.1s;">
+          <div class="feature-icon icon-bounce" style="--icon-delay: 0.2s;">🛡️</div>
+          <h3>Certified Vehicles</h3>
+          <p>Every car undergoes a 150-point inspection for quality assurance.</p>
+          <div class="feature-glow"></div>
+        </div>
+        <div class="feature-card scroll-reveal feature-hover-tilt" style="--delay: 0.2s;">
+          <div class="feature-icon icon-bounce" style="--icon-delay: 0.4s;">💳</div>
+          <h3>Flexible Financing</h3>
+          <p>Competitive finance options tailored to your budget and needs.</p>
+          <div class="feature-glow"></div>
+        </div>
+        <div class="feature-card scroll-reveal feature-hover-tilt" style="--delay: 0.3s;">
+          <div class="feature-icon icon-bounce" style="--icon-delay: 0.6s;">🕒</div>
+          <h3>Same-Day Test Drives</h3>
+          <p>Book online and test drive your favorite models today.</p>
+          <div class="feature-glow"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Slider -->
+    <!-- Testimonials Slider -->
+  <section id="reviews" class="testimonials section">
+    <div class="container">
+      <div class="section-header section-header-animate">
+        <h2 class="section-title-animate">What Our Customers Say</h2>
+        <p>Real stories from happy drivers.</p>
+      </div>
+      <div class="testimonials-carousel">
+        <button class="carousel-btn prev btn-slide-in" aria-label="Previous review">‹</button>
+        <div class="testimonials-track">
+          <div class="testimonial-slide active testimonial-fade-in">
+            <div class="testimonial-content card-hover-float">
+              <div class="stars stars-animate">★★★★★</div>
+              <p class="testimonial-text">"Seamless experience from start to finish. The team helped me find the perfect car within my budget."</p>
+              <div class="testimonial-author">
+                <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=120" alt="Customer 1" class="author-img-animate" />
+                <div>
+                  <h4>Sarah Johnson</h4>
+                  <p>Software Engineer</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-slide testimonial-fade-in">
+            <div class="testimonial-content card-hover-float">
+              <div class="stars stars-animate">★★★★★</div>
+              <p class="testimonial-text">"I booked a test drive online and drove home the same day. Absolutely love my new car!"</p>
+              <div class="testimonial-author">
+                <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=120" alt="Customer 2" class="author-img-animate" />
+                <div>
+                  <h4>Michael Chen</h4>
+                  <p>Product Manager</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-slide testimonial-fade-in">
+            <div class="testimonial-content card-hover-float">
+              <div class="stars stars-animate">★★★★★</div>
+              <p class="testimonial-text">"Transparent, friendly, and professional. The certified vehicle program gave me full confidence."</p>
+              <div class="testimonial-author">
+                <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=120" alt="Customer 3" class="author-img-animate" />
+                <div>
+                  <h4>Emily Rodriguez</h4>
+                  <p>Designer</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-btn next btn-slide-in" style="--slide-delay: 0.1s;" aria-label="Next review">›</button>
+      </div>
+      <div class="carousel-dots dots-animate">
+        <span class="dot active dot-pulse" data-slide="0"></span>
+        <span class="dot dot-pulse" data-slide="1"></span>
+        <span class="dot dot-pulse" data-slide="2"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / Inquiry Form -->
+    <!-- Contact / Inquiry Form -->
+  <section id="contact" class="contact section section-bg-animate">
+    <div class="container">
+      <div class="contact-content">
+        <div class="contact-info scroll-reveal">
+          <h2 class="info-title-animate">Get in Touch</h2>
+          <p>Have a question or want a personalized quote? Send us a message and we'll get back to you shortly.</p>
+          <ul class="quick-info quick-info-animate">
+            <li class="info-item-slide" style="--i: 0;"><strong>Phone:</strong> <a href="tel:+11234567890">+1 (123) 456-7890</a></li>
+            <li class="info-item-slide" style="--i: 1;"><strong>Email:</strong> <a href="mailto:sales@roadstarmotors.com">sales@roadstarmotors.com</a></li>
+            <li class="info-item-slide" style="--i: 2;"><strong>Address:</strong> 123 Auto Drive, Motor City, USA</li>
+          </ul>
+          <div class="social-links social-links-animate">
+            <a href="#" aria-label="Facebook" class="social-icon-bounce" style="--i: 0;">f</a>
+            <a href="#" aria-label="Instagram" class="social-icon-bounce" style="--i: 1;">📷</a>
+            <a href="#" aria-label="Twitter" class="social-icon-bounce" style="--i: 2;">𝕏</a>
+            <a href="#" aria-label="YouTube" class="social-icon-bounce" style="--i: 3;">▶</a>
+          </div>
+        </div>
+        <form class="contact-form scroll-reveal form-slide-in" novalidate>
+          <div class="form-row">
+            <div class="form-group form-input-focus">
+              <label for="name">Name*</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required />
+              <small class="error">Please enter your name</small>
+            </div>
+            <div class="form-group form-input-focus">
+              <label for="email">Email*</label>
+              <input id="email" name="email" type="email" placeholder="your@email.com" required />
+              <small class="error">Please enter a valid email</small>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group form-input-focus">
+              <label for="phone">Phone*</label>
+              <input id="phone" name="phone" type="tel" placeholder="(123) 456-7890" required />
+              <small class="error">Please enter a valid phone</small>
+            </div>
+            <div class="form-group form-input-focus">
+              <label for="subject">Subject</label>
+              <input id="subject" name="subject" type="text" placeholder="Test drive / Quote / Other" />
+            </div>
+          </div>
+          <div class="form-group form-input-focus">
+            <label for="message">Message*</label>
+            <textarea id="message" name="message" rows="5" placeholder="Tell us what you're looking for..." required></textarea>
+            <small class="error">Please enter a message</small>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit-animate">
+            <span>Send Inquiry</span>
+            <span class="btn-shine"></span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+
+  <!-- Footer -->
+  <footer class="footer footer-fade-in">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-animate" style="--col-delay: 0s;">
+          <h3>RoadStar Motors</h3>
+          <p>Premium dealership offering certified vehicles, transparent pricing, and top-tier service.</p>
+        </div>
+        <div class="footer-col footer-col-animate" style="--col-delay: 0.1s;">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#inventory" class="footer-link-hover">Inventory</a></li>
+            <li><a href="#about" class="footer-link-hover">About</a></li>
+            <li><a href="#reviews" class="footer-link-hover">Reviews</a></li>
+            <li><a href="#contact" class="footer-link-hover">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-col-animate" style="--col-delay: 0.2s;">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:+11234567890" class="footer-link-hover">+1 (123) 456-7890</a></li>
+            <li><a href="mailto:sales@roadstarmotors.com" class="footer-link-hover">sales@roadstarmotors.com</a></li>
+            <li>123 Auto Drive, Motor City, USA</li>
+          </ul>
+        </div>
+        <div class="footer-col footer-col-animate" style="--col-delay: 0.3s;">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook" class="social-icon-bounce" style="--i: 0;">f</a>
+            <a href="#" aria-label="Instagram" class="social-icon-bounce" style="--i: 1;">📷</a>
+            <a href="#" aria-label="Twitter" class="social-icon-bounce" style="--i: 2;">𝕏</a>
+            <a href="#" aria-label="YouTube" class="social-icon-bounce" style="--i: 3;">▶</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom footer-bottom-animate">
+        <p>© 2025 RoadStar Motors. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" aria-label="Back to Top" class="back-to-top-spin">↑</button>
+
+  <!-- 360° Car Viewer Modal -->
+  <div id="carViewerModal" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-container">
+      <button class="modal-close" aria-label="Close viewer">&times;</button>
+      
+      <div class="viewer-header">
+        <h2 id="viewerCarName">RoadStar GT</h2>
+        <div class="viewer-controls">
+          <button class="viewer-btn" id="zoomOut" aria-label="Zoom out" title="Zoom out">−</button>
+          <button class="viewer-btn" id="zoomIn" aria-label="Zoom in" title="Zoom in">+</button>
+          <button class="viewer-btn" id="fullscreenToggle" aria-label="Toggle fullscreen" title="Fullscreen">⛶</button>
+        </div>
+      </div>
+
+      <div class="viewer-main">
+        <!-- 360° Rotation Area -->
+        <div class="rotation-viewer">
+          <div class="rotation-hint">
+            <span>🔄 Drag to spin 360° • Click & hold to rotate</span>
+          </div>
+          <div class="viewer-canvas">
+            <img id="viewer360Image" src="" alt="360° car view" draggable="false" />
+            <div class="rotation-progress">
+              <div class="progress-bar" id="progressBar"></div>
+            </div>
+          </div>
+          <button class="auto-rotate-btn" id="autoRotate" title="Auto-rotate">
+            <span class="rotate-icon">⟳</span>
+          </button>
+          <div class="angle-indicator">
+            <span id="currentAngle">0</span>°
+          </div>
+          <div class="view-mode-toggle">
+            <button class="mode-btn active" data-mode="360">360° View</button>
+            <button class="mode-btn" data-mode="gallery">Gallery</button>
+          </div>
+        </div>
+
+        <!-- Thumbnail Gallery -->
+        <div class="thumbnail-gallery" id="gallerySection">
+          <button class="gallery-nav prev-thumb" aria-label="Previous thumbnails">‹</button>
+          <div class="thumbnails-track" id="thumbnailsTrack">
+            <!-- Thumbnails will be dynamically inserted here -->
+          </div>
+          <button class="gallery-nav next-thumb" aria-label="Next thumbnails">›</button>
+        </div>
+      </div>
+
+      <div class="viewer-info">
+        <p id="viewerCarMeta">2023 • Automatic • Petrol</p>
+        <p class="viewer-price" id="viewerCarPrice">$48,990</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
